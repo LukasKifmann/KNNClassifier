@@ -93,6 +93,7 @@ class FeatureProjection:
             running_regularization_loss /= X.shape[0]
             self.__log(f", regularization loss: {running_regularization_loss:.8e}")
 
+        P.requires_grad_(False)
         self.__P = torch.eye(X.shape[1] + 1, dtype=P.dtype)
         self.__P[-1, :-1] = -torch.from_numpy(mean)
         self.__P @= torch.from_numpy(
