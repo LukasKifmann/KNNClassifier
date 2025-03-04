@@ -50,8 +50,8 @@ class FeatureProjection:
         std = np.std(X, 0)
         X = (X - mean) / std
 
-        P = torch.empty((X.shape[1] + 1, self.dim))
-        O = torch.empty((self.dim, y.max() + 1))
+        P = torch.from_numpy(np.empty((X.shape[1] + 1, self.dim), X.dtype))
+        O = torch.empty((self.dim, y.max() + 1), dtype=P.dtype)
 
         torch.nn.init.kaiming_uniform_(P)
         torch.nn.init.xavier_uniform_(O)
