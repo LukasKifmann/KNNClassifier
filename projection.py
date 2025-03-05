@@ -48,7 +48,7 @@ class FeatureProjection:
     def fit(self, X: np.ndarray, y: np.ndarray, n_epochs: int, batch_size: int):
         mean = np.mean(X, 0)
         std = np.std(X, 0)
-        X = (X - mean) / std
+        X = (X - mean) / (std + 1e-24)
 
         P = torch.from_numpy(np.empty((X.shape[1] + 1, self.dim), X.dtype))
         O = torch.empty((self.dim, y.max() + 1), dtype=P.dtype)
